@@ -1,7 +1,9 @@
-using ImageProfile_Images.Models;
-using ImageProfile_Images.Repositories;
+using ImageProfile_Login.Models;
+using ImageProfile_Login.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Rewrite;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ImageProfile_Images
+namespace ImageProfile_Login
 {
     public class Startup
     {
@@ -49,27 +51,26 @@ namespace ImageProfile_Images
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
-
             app.UseRouting();
 
             app.UseAuthorization();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapRazorPages();
-            //});
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "apps/ImageProfile";
-            });
+            // breaks production if specifying paths in HttpGet/Post (when using UseSpa). So controllers must be reflective by method name, not direct paths.
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+            });
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "apps/ImageProfile";
+                if (env.IsDevelopment())
+                {
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
             });
 
         }

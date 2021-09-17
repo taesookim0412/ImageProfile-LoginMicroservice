@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ImageProfile_Images.Pages
+namespace ImageProfile_Login.Pages
 {
     public class PrivacyModel : PageModel
     {

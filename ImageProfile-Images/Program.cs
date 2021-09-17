@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ImageProfile_Images
+namespace ImageProfile_Login
 {
     public class Program
     {

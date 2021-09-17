@@ -1,5 +1,5 @@
-﻿using ImageProfile_Images.Models;
-using ImageProfile_Images.Repositories;
+﻿using ImageProfile_Login.Models;
+using ImageProfile_Login.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace ImageProfile_Images.Controllers
+namespace ImageProfile_Login.Controllers
 {
     public class LoginController : Controller
     {
@@ -19,15 +19,19 @@ namespace ImageProfile_Images.Controllers
             this.userRepository = userRepository;
         }
 
-        public IActionResult Index()
+
+        //Input: username, password (bcrypted)
+        [HttpPost]
+        public string Login(string username, string password)
         {
-            return View();
+            return userRepository.ValidateUser(username, password).ToString();
         }
-        [HttpGet("login")]
-        public String login()
+
+        //Input: username, password (bcrypted)
+        [HttpPost]
+        public string Create(string username, string password)
         {
-            userRepository.CreateUser("a", "b");
-            return userRepository.SelectAllUsers();
+            return userRepository.CreateUser(username, password).ToString();
         }
     }
 }

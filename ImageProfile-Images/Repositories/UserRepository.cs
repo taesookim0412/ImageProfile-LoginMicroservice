@@ -1,11 +1,11 @@
-﻿using ImageProfile_Images.Models;
+﻿using ImageProfile_Login.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace ImageProfile_Images.Repositories
+namespace ImageProfile_Login.Repositories
 {
     public class UserRepository
     {
@@ -14,27 +14,28 @@ namespace ImageProfile_Images.Repositories
         {
             this.context = context;
         }
-        public string ValidateUser(string username, string password)
+        public bool ValidateUser(string username, string password)
         {
-            IQueryable<User> result = from user in context.Users
-                         where user.username == username
-                         where user.password == password
-                         select user;
-            return "Okay";
+            User result = (from user in context.Users
+                         where (user.username == username && user.password == password)
+                         select user).SingleOrDefault();
+            return result != null;
         }
-        public void CreateUser(string username, string password)
+        public bool FindOneUser(string username)
         {
+            return ((from user in context.Users
+                    where user.username == username
+                     select user).SingleOrDefault() != null);
+        }
+        public bool CreateUser(string username, string password)
+        {
+            if (FindOneUser(username)) return false;
             User user = new User();
             user.username = username;
             user.password = password;
             context.Add(user);
             context.SaveChanges();
-        }
-        public string SelectAllUsers()
-        {
-            User[] result = (from user in context.Users
-                                       select user).ToArray();
-            return JsonSerializer.Serialize(result);
+            return true;
         }
     }
 }

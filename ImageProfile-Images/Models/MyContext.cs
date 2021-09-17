@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ImageProfile_Images.Models
+namespace ImageProfile_Login.Models
 {
     public class MyContext : DbContext
     {
