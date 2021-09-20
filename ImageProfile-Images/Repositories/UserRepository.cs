@@ -23,11 +23,10 @@ namespace ImageProfile_Login.Repositories
                          select user).SingleOrDefault();
             if (result == null)
             {
-                Console.WriteLine("Ok failed");
                 return new BadRequestResult();
             };
             //callerName: "Login", 
-            return new CreatedAtActionResult("Login", this.controllerName, null, result);
+            return new CreatedAtActionResult("Login", this.controllerName, null, true);
         }
         public bool FindOneUser(string username)
         {
@@ -35,9 +34,9 @@ namespace ImageProfile_Login.Repositories
                     where user.username == username
                      select user).SingleOrDefault() != null);
         }
-        public async Task<ActionResult<bool>> CreateUser(string username, string password)
+        public async Task<ActionResult<string>> CreateUser(string username, string password)
         {
-            if (FindOneUser(username)) return false;
+            if (FindOneUser(username)) return new CreatedAtActionResult("Create", this.controllerName, null, false);
             try
             {
                 User user = new User();
@@ -51,7 +50,7 @@ namespace ImageProfile_Login.Repositories
                 return new BadRequestResult();
             }
             
-            return true;
+            return new CreatedAtActionResult("Create", this.controllerName, null, true);
         }
     }
 }

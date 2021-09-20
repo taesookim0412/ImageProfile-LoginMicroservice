@@ -35,7 +35,7 @@ namespace ImageProfile_Login.Controllers
         [HttpPost]
         public async Task<ActionResult<string>> Create(string username, string password)
         {
-            return (await userRepository.CreateUser(username, password)).ToString();
+            return await userRepository.CreateUser(username, password);
         }
     }
 }
