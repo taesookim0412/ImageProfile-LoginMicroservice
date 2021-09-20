@@ -1,5 +1,6 @@
 ﻿using ImageProfile_Login.Models;
 using ImageProfile_Login.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -22,16 +23,19 @@ namespace ImageProfile_Login.Controllers
 
         //Input: username, password (bcrypted)
         [HttpPost]
-        public string Login(string username, string password)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<string>> Login(string username, string password)
         {
-            return userRepository.ValidateUser(username, password).ToString();
+            return await userRepository.ValidateUser(username, password);
         }
 
         //Input: username, password (bcrypted)
+        //Returns: True, False, or 400
         [HttpPost]
-        public string Create(string username, string password)
+        public async Task<ActionResult<string>> Create(string username, string password)
         {
-            return userRepository.CreateUser(username, password).ToString();
+            return (await userRepository.CreateUser(username, password)).ToString();
         }
     }
 }
