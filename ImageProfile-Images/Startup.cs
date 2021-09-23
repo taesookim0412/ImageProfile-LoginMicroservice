@@ -66,6 +66,7 @@ namespace ImageProfile_Login
             });
             app.UseSpa(spa =>
             {
+                spa.UseProxyToSpaDevelopmentServer("http://localhost:8000/");
                 spa.Options.SourcePath = "apps/ImageProfile";
                 if (env.IsDevelopment())
                 {

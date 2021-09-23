@@ -22,20 +22,30 @@ namespace ImageProfile_Login.Controllers
 
 
         //Input: username, password (bcrypted)
+        //Returns: "404: true, 200: error"
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<string>> Login(string username, string password)
+        public async Task<ActionResult> Login(string username, string password)
         {
-            return await userRepository.ValidateUser(username, password);
+            User result = await userRepository.ValidateUser(username, password);
+            if (result == null) { return new BadRequestResult(); }
+            //return new CreatedAtActionResult("login", "login", null, true);
+            return Ok(true);
         }
 
         //Input: username, password (bcrypted)
         //Returns: True, False, or 400
         [HttpPost]
-        public async Task<ActionResult<string>> Create(string username, string password)
+        public async Task<ActionResult> Create(string username, string password)
         {
-            return await userRepository.CreateUser(username, password);
+            return Ok(await userRepository.CreateUser(username, password));
+        }
+        [HttpGet]
+        //Returns: Csrf String
+        public async Task<ActionResult> CreateXCsrfToken()
+        {
+            return Ok(await userRepository.GetXCsrfToken());
         }
     }
 }
