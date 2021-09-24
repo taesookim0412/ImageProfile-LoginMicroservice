@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ImageProfile_Login.Migrations
 {
-    [DbContext(typeof(MyContext))]
+    [DbContext(typeof(UserReader))]
     [Migration("20210915193535_InitialMigration")]
     partial class InitialMigration
     {

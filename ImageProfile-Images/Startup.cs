@@ -17,9 +17,11 @@ namespace ImageProfile_Login
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        IWebHostEnvironment _env = null;
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -33,8 +35,22 @@ namespace ImageProfile_Login
             {
                 configuration.RootPath = "apps/ImageProfile/build";
             });
-            string connectionString = Configuration.GetConnectionString("ImageProfile");
-            services.AddDbContext<MyContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            
+            if (_env.IsDevelopment())
+            {
+                string connectionStringReader = Configuration.GetConnectionString("ImageProfileDevReader");
+                services.AddDbContext<UserReader>(options => options.UseMySql(connectionStringReader, ServerVersion.AutoDetect(connectionStringReader)));
+                string connectionStringWriter = Configuration.GetConnectionString("ImageProfileDevWriter");
+                services.AddDbContext<UserWriter>(options => options.UseMySql(connectionStringWriter, ServerVersion.AutoDetect(connectionStringWriter)));
+            }
+            else
+            {
+                string connectionStringReader = Configuration.GetConnectionString("ImageProfileProdReader");
+                services.AddDbContext<UserReader>(options => options.UseMySql(connectionStringReader, ServerVersion.AutoDetect(connectionStringReader)));
+                string connectionStringWriter = Configuration.GetConnectionString("ImageProfileProdWriter");
+                services.AddDbContext<UserWriter>(options => options.UseMySql(connectionStringWriter, ServerVersion.AutoDetect(connectionStringWriter)));
+            }
+            
             services.AddTransient<UserRepository>();
 
         }
@@ -66,7 +82,8 @@ namespace ImageProfile_Login
             });
             app.UseSpa(spa =>
             {
-                spa.UseProxyToSpaDevelopmentServer("http://localhost:8000/");
+                //dont use this, handle the proxy through spa's package json and route requests to :5000
+                //spa.UseProxyToSpaDevelopmentServer("http://localhost:8000/");
                 spa.Options.SourcePath = "apps/ImageProfile";
                 if (env.IsDevelopment())
                 {

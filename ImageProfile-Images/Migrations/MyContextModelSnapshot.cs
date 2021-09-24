@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ImageProfile_Login.Migrations
 {
-    [DbContext(typeof(MyContext))]
+    [DbContext(typeof(UserReader))]
     partial class MyContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

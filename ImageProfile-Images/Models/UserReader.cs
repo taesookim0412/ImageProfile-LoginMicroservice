@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ImageProfile_Login.Models
 {
-    public class MyContext : DbContext
+    public class UserReader : DbContext
     {
-        public MyContext(DbContextOptions options) : base(options) { }
+        public UserReader(DbContextOptions<UserReader> options) : base(options) { }
         
         public DbSet<User> Users { get; set; }
     }

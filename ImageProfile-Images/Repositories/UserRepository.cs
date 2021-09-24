@@ -13,16 +13,18 @@ namespace ImageProfile_Login.Repositories
 {
     public class UserRepository
     {
-        private readonly MyContext context;
+        private readonly UserReader contextReader;
+        private readonly UserWriter contextWriter;
         private string controllerName = "Login";
-        public UserRepository(MyContext context)
+        public UserRepository(UserReader contextReader, UserWriter contextWriter)
         {
-            this.context = context;
+            this.contextReader = contextReader;
+            this.contextWriter = contextWriter;
         }
         //Async DB Call
         public async Task<User> ValidateUser(string username, string password)
         {
-            return (await (from user in context.Users
+            return (await (from user in contextReader.Users
                            where (user.username == username && user.password == password)
                            select user).SingleAsync());
         }
@@ -30,7 +32,7 @@ namespace ImageProfile_Login.Repositories
         public async Task<bool> FindOneUser(string username)
         {
             //return (context.Users.Where(user => user.username == username).SingleAsync() != null);
-            return (await ((from user in context.Users
+            return (await ((from user in contextReader.Users
                     where user.username == username
                     select user).SingleAsync())!= null);
         }
@@ -43,8 +45,8 @@ namespace ImageProfile_Login.Repositories
                 User user = new User();
                 user.username = username;
                 user.password = password;
-                await context.AddAsync(user);
-                await context.SaveChangesAsync();
+                await contextWriter.AddAsync(user);
+                await contextWriter.SaveChangesAsync();
             }
             catch (Exception e)
             {
