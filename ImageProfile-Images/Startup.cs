@@ -31,7 +31,8 @@ namespace ImageProfile_Login
         public void ConfigureServices(IServiceCollection services)
         {
             //core
-            services.AddMvc(options => options.EnableEndpointRouting = false);
+            //services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddControllers();
             //services.AddRazorPages();
             services.AddSpaStaticFiles(configuration =>
             {
@@ -70,15 +71,19 @@ namespace ImageProfile_Login
                 app.UseExceptionHandler("/Error");
             }
             app.UseSpaStaticFiles();
-            app.UseMvc();
 
             // breaks production if specifying paths in HttpGet/Post (when using UseSpa). So controllers must be reflective by method name, not direct paths.
+            app.UseRouting();
             //app.UseEndpoints(endpoints =>
             //{
             //    endpoints.MapControllerRoute(
             //        name: "default",
             //        pattern: "{controller}/{action=Index}/{id?}");
             //});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
             app.UseSpa(spa =>
             {
                 //dont use this, handle the proxy through spa's package json and route requests to :5000
