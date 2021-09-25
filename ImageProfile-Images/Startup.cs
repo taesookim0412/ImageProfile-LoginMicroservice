@@ -29,7 +29,8 @@ namespace ImageProfile_Login
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            //core
+            services.AddMvc(options => options.EnableEndpointRouting = false);
             //services.AddRazorPages();
             services.AddSpaStaticFiles(configuration =>
             {
@@ -52,7 +53,6 @@ namespace ImageProfile_Login
             }
             
             services.AddTransient<UserRepository>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,20 +66,16 @@ namespace ImageProfile_Login
             {
                 app.UseExceptionHandler("/Error");
             }
-
-            //app.UseStaticFiles();
             app.UseSpaStaticFiles();
-            app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseMvc();
 
             // breaks production if specifying paths in HttpGet/Post (when using UseSpa). So controllers must be reflective by method name, not direct paths.
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller}/{action=Index}/{id?}");
+            //});
             app.UseSpa(spa =>
             {
                 //dont use this, handle the proxy through spa's package json and route requests to :5000

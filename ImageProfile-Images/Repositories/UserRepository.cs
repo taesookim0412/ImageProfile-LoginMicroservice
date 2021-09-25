@@ -66,13 +66,25 @@ namespace ImageProfile_Login.Repositories
         {
             return await Task.Run(() =>
             {
-                string allAsciiChars = "!\"#$%&\\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~";
-                Random random = new Random();
-                string resultToken = new string(
-                   Enumerable.Repeat(allAsciiChars, 64)
-                   .Select(token => token[random.Next(token.Length)]).ToArray());
-                return resultToken.ToString();
+                return getToken();
             });
+        }
+
+        public string getToken()
+        {
+            Random random = new Random();
+            string allAsciiChars = "!\"#$%&\\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+            return string.Join("",
+                Enumerable.Repeat(allAsciiChars, 4)
+                .Select(bigToken =>
+                {
+                    char[] res = new char[bigToken.Length];
+                    for (int i = 0; i < res.Length; i++)
+                    {
+                        res[i] = bigToken[random.Next(bigToken.Length)];
+                    }
+                    return string.Join("", res);
+                }));
         }
     }
 }

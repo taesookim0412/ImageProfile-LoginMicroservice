@@ -23,7 +23,7 @@ namespace ImageProfile_Login.Controllers
 
         //Input: username, password (bcrypted)
         //Returns: "404: true, 200: error"
-        [HttpPost]
+        [HttpPost("/login/login")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Login(string username, string password)
@@ -36,12 +36,12 @@ namespace ImageProfile_Login.Controllers
 
         //Input: username, password (bcrypted)
         //Returns: True, False, or 400
-        [HttpPost]
+        [HttpPost("login/create")]
         public async Task<ActionResult> Create(string username, string password)
         {
             return Ok(await userRepository.CreateUser(username, password));
         }
-        [HttpGet]
+        [HttpGet("login/createxcsrftoken")]
         //Returns: Csrf String
         public async Task<ActionResult> CreateXCsrfToken()
         {
