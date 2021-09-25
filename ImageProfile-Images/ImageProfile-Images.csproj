@@ -53,6 +53,7 @@
     </PackageReference>
     <PackageReference Include="MySql.Data" Version="8.0.26" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.12.2" />
   </ItemGroup>
 
   <ItemGroup>

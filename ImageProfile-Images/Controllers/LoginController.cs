@@ -1,4 +1,5 @@
-﻿using ImageProfile_Login.Models;
+﻿using ImageProfile_Images.Repositories;
+using ImageProfile_Login.Models;
 using ImageProfile_Login.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ namespace ImageProfile_Login.Controllers
         UserRepository userRepository;
         //MyContext context;
 
-        public LoginController(UserRepository userRepository)
+        public LoginController(UserRepository userRepository, JwtRepository jwtRepository)
         {
             this.userRepository = userRepository;
         }

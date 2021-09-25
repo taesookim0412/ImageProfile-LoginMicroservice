@@ -1,3 +1,4 @@
+using ImageProfile_Images.Repositories;
 using ImageProfile_Login.Models;
 using ImageProfile_Login.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -53,6 +54,8 @@ namespace ImageProfile_Login
             }
             
             services.AddTransient<UserRepository>();
+            services.AddTransient<JwtRepository>();
+            services.AddTransient<PKFileReader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,7 +89,6 @@ namespace ImageProfile_Login
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
-
         }
     }
 }
