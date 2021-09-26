@@ -55,7 +55,7 @@ namespace ImageProfile_Images.Repositories
         public bool ValidateToken(string token, string username)
         {
             using RSA rsa = RSA.Create();
-            rsa.ImportRSAPublicKey(publicKey, out _);
+            rsa.ImportSubjectPublicKeyInfo(publicKey, out _);
 
             var validationParameters = new TokenValidationParameters
             {

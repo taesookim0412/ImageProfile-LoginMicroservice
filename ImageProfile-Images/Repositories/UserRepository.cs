@@ -16,6 +16,8 @@ namespace ImageProfile_Login.Repositories
         private readonly UserReader contextReader;
         private readonly UserWriter contextWriter;
         private string controllerName = "Login";
+        Random random = new Random();
+        IEnumerable<string> repeatedAllAsciiChars = Enumerable.Repeat("!\"#$%&\\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~", 4);
         public UserRepository(UserReader contextReader, UserWriter contextWriter)
         {
             this.contextReader = contextReader;
@@ -33,8 +35,8 @@ namespace ImageProfile_Login.Repositories
         {
             //return (context.Users.Where(user => user.username == username).SingleAsync() != null);
             return (await ((from user in contextReader.Users
-                    where user.username == username
-                    select user).SingleAsync())!= null);
+                            where user.username == username
+                            select user).SingleAsync()) != null);
         }
 
         public async Task<ActionResult<bool>> CreateUser(string username, string password)
@@ -52,7 +54,7 @@ namespace ImageProfile_Login.Repositories
             {
                 return new BadRequestResult();
             }
-            
+
             return new CreatedAtActionResult("Create", this.controllerName, null, true);
         }
         //TODO: Convert this to grpc, use rsa keys instead
@@ -66,25 +68,17 @@ namespace ImageProfile_Login.Repositories
         {
             return await Task.Run(() =>
             {
-                return getToken();
-            });
-        }
-
-        public string getToken()
-        {
-            Random random = new Random();
-            string allAsciiChars = "!\"#$%&\\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~";
-            return string.Join("",
-                Enumerable.Repeat(allAsciiChars, 4)
-                .Select(bigToken =>
-                {
-                    char[] res = new char[bigToken.Length];
-                    for (int i = 0; i < res.Length; i++)
+                return string.Join("",
+                    repeatedAllAsciiChars
+                    .Select(bigToken =>
                     {
-                        res[i] = bigToken[random.Next(bigToken.Length)];
-                    }
-                    return string.Join("", res);
-                }));
+                        return string.Concat(bigToken.Select(c =>
+                         {
+                             return bigToken[random.Next(bigToken.Length)];
+                         }));
+                    })
+                    );
+            });
         }
     }
 }
