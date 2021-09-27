@@ -19,6 +19,7 @@ namespace ImageProfile_Login.Controllers
         public LoginController(UserRepository userRepository, JwtRepository jwtRepository)
         {
             this.userRepository = userRepository;
+            Console.WriteLine(jwtRepository.CreateToken("admin12345").Token);
         }
 
 

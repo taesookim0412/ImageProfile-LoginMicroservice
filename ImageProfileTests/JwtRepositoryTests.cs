@@ -10,11 +10,15 @@ namespace ImageProfileTests
 {
     public class JwtRepositoryTests
     {
+        //Hard coded paths. Set the parameter string to be the directory that holds a keys directory with privatekey.pem and publickey.pem
         PKFileReader pkFileReader = new PKFileReader(@"B:\repos\ImageProfile\ImageProfile-LoginMicroservice\ImageProfileTests");
+        PKFileReader secondaryPkFileReader = new PKFileReader(@"B:\repos\ImageProfile\ImageProfile-LoginMicroservice\ImageProfileTests\keys\BadKeys");
         JwtRepository jwtRepository;
+        JwtRepository jwtRepository2;
         public JwtRepositoryTests()
         {
             jwtRepository = new JwtRepository(pkFileReader);
+            jwtRepository2 = new JwtRepository(secondaryPkFileReader);
         }
         [Fact]
         public void JwtReponseCanValidateItself()
@@ -22,6 +26,13 @@ namespace ImageProfileTests
             string usernameForValidation = "admin12345";
             JwtResponse generatedToken = jwtRepository.CreateToken(usernameForValidation);
             Assert.True(jwtRepository.ValidateToken(generatedToken.Token, usernameForValidation) == true);
+        }
+        [Fact]
+        public void JwtResponseCanInvalidateIncorrectPublicKey()
+        {
+            string usernameForValidation = "admin12345";
+            JwtResponse generatedToken = jwtRepository.CreateToken(usernameForValidation);
+            Assert.True(jwtRepository2.ValidateToken(generatedToken.Token, usernameForValidation) == false);
         }
         [Fact]
         public void JwtResponseInvalidatesIncorrectName()

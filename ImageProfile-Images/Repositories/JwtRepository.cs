@@ -36,10 +36,11 @@ namespace ImageProfile_Images.Repositories
 
             var jwt = new JwtSecurityToken(
                 issuer: "LoginMicro",
-                audience: "Users",
+                audience: $"Users/{username}",
                 claims: new Claim[] {
                     new Claim(JwtRegisteredClaimNames.Name, username)
                 },
+
                 notBefore: now,
                 expires: now.AddMinutes(30),
                 signingCredentials: signingCredentials
@@ -64,13 +65,13 @@ namespace ImageProfile_Images.Repositories
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = "LoginMicro",
-                ValidAudience = "Users",
+                ValidAudience = $"Users/{username}",
                 IssuerSigningKey = new RsaSecurityKey(rsa),
-                NameClaimType = username,
                 CryptoProviderFactory = new CryptoProviderFactory()
                 {
                     CacheSignatureProviders = false
                 }
+                
             };
 
             try
