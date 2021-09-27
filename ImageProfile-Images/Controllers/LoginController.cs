@@ -1,4 +1,5 @@
-﻿using ImageProfile_Images.Repositories;
+﻿using ImageProfile_Images.Interfaces;
+using ImageProfile_Images.Repositories;
 using ImageProfile_Login.Models;
 using ImageProfile_Login.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -14,26 +15,24 @@ namespace ImageProfile_Login.Controllers
     public class LoginController : Controller
     {
         UserRepository userRepository;
+        JwtRepository jwtRepository;
         //MyContext context;
 
         public LoginController(UserRepository userRepository, JwtRepository jwtRepository)
         {
             this.userRepository = userRepository;
-            Console.WriteLine(jwtRepository.CreateToken("admin12345").Token);
+            this.jwtRepository = jwtRepository;
         }
 
 
         //Input: username, password (bcrypted)
-        //Returns: "404: true, 200: error"
+        //Returns: "400: error, 200: jwt token"
         [HttpPost("/login/login")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Login(string username, string password)
         {
             User result = await userRepository.ValidateUser(username, password);
-            if (result == null) { return new BadRequestResult(); }
-            //return new CreatedAtActionResult("login", "login", null, true);
-            return Ok(true);
+            if (result == null) { return BadRequest(); }
+            return Ok((await jwtRepository.CreateToken(username)).Token);
         }
 
         //Input: username, password (bcrypted)
@@ -41,7 +40,12 @@ namespace ImageProfile_Login.Controllers
         [HttpPost("login/create")]
         public async Task<ActionResult> Create(string username, string password)
         {
-            return Ok(await userRepository.CreateUser(username, password));
+            CreationStatus creationStatus = await userRepository.CreateUser(username, password);
+            if (creationStatus.state == CreationStatus.Success)
+            {
+                return Ok(await jwtRepository.CreateToken(username));
+            }
+            return BadRequest();
         }
         [HttpGet("login/createxcsrftoken")]
         //Returns: Csrf String
