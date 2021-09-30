@@ -16,9 +16,5 @@ namespace ImageProfile_Images.Repositories
             this.userReader = userReader;
             this.userRepository = userRepository;
         }
-        public async Task<string> getJwtToken(string username) { }
-        {
-            
-        }
     }
 }
