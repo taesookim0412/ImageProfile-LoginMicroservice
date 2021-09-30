@@ -15,7 +15,7 @@ namespace ImageProfileTests
         [Fact]
         public void XCsrfTokenIsLogicalLength()
         {
-            UserRepository userRepository = new UserRepository(null, null);
+            UserRepository userRepository = new UserRepository(null, null, null);
             int numberOfRepeats = 4;
             string combinedString = string.Join("", Enumerable.Repeat("!\"#$%&\\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~", numberOfRepeats));
             int targetLength = combinedString.Length;

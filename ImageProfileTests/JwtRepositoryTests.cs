@@ -24,22 +24,22 @@ namespace ImageProfileTests
         public void JwtReponseCanValidateItself()
         {
             string usernameForValidation = "admin12345";
-            JwtResponse generatedToken = jwtRepository.CreateToken(usernameForValidation);
-            Assert.True(jwtRepository.ValidateToken(generatedToken.Token, usernameForValidation) == true);
+            JwtResponse generatedToken = jwtRepository.CreateToken(usernameForValidation).Result;
+            Assert.True(jwtRepository.ValidateToken(generatedToken.Token, usernameForValidation).Result == true);
         }
         [Fact]
         public void JwtResponseCanInvalidateIncorrectPublicKey()
         {
             string usernameForValidation = "admin12345";
-            JwtResponse generatedToken = jwtRepository.CreateToken(usernameForValidation);
-            Assert.True(jwtRepository2.ValidateToken(generatedToken.Token, usernameForValidation) == false);
+            JwtResponse generatedToken = jwtRepository.CreateToken(usernameForValidation).Result;
+            Assert.True(jwtRepository2.ValidateToken(generatedToken.Token, usernameForValidation).Result == false);
         }
         [Fact]
         public void JwtResponseInvalidatesIncorrectName()
         {
             string usernameForValidation = "admin12345";
-            JwtResponse generatedToken = jwtRepository.CreateToken(usernameForValidation);
-            Assert.True(jwtRepository.ValidateToken(generatedToken.Token, "admin12344") == false);
+            JwtResponse generatedToken = jwtRepository.CreateToken(usernameForValidation).Result;
+            Assert.True(jwtRepository.ValidateToken(generatedToken.Token, "admin12344").Result == false);
         }
     }
 }
