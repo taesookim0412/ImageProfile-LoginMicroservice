@@ -54,9 +54,9 @@ namespace ImageProfile_Login
                 services.AddDbContext<UserWriter>(options => options.UseMySql(connectionStringWriter, ServerVersion.AutoDetect(connectionStringWriter)));
             }
             
-            services.AddTransient<UserRepository>();
-            services.AddTransient<JwtRepository>();
-            services.AddTransient<PKFileReader>();
+            services.AddSingleton<UserRepository>();
+            services.AddSingleton<JwtRepository>();
+            services.AddSingleton<PKFileReader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
