@@ -7587,11 +7587,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "B:\\repos\\ImageProfile\\ImageProfile-LoginMicroservice\\ImageProfileTests\\ImageProfileTests.csproj",
+      "projectUniqueName": "B:\\repos\\ImageProfile-LoginMicroservice\\ImageProfileTests\\ImageProfileTests.csproj",
       "projectName": "ImageProfileTests",
-      "projectPath": "B:\\repos\\ImageProfile\\ImageProfile-LoginMicroservice\\ImageProfileTests\\ImageProfileTests.csproj",
+      "projectPath": "B:\\repos\\ImageProfile-LoginMicroservice\\ImageProfileTests\\ImageProfileTests.csproj",
       "packagesPath": "C:\\Users\\terry\\.nuget\\packages\\",
-      "outputPath": "B:\\repos\\ImageProfile\\ImageProfile-LoginMicroservice\\ImageProfileTests\\obj\\",
+      "outputPath": "B:\\repos\\ImageProfile-LoginMicroservice\\ImageProfileTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\terry\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -7608,8 +7608,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "B:\\repos\\ImageProfile\\ImageProfile-LoginMicroservice\\ImageProfile-Images\\ImageProfile-Images.csproj": {
-              "projectPath": "B:\\repos\\ImageProfile\\ImageProfile-LoginMicroservice\\ImageProfile-Images\\ImageProfile-Images.csproj"
+            "B:\\repos\\ImageProfile-LoginMicroservice\\ImageProfile-Images\\ImageProfile-Images.csproj": {
+              "projectPath": "B:\\repos\\ImageProfile-LoginMicroservice\\ImageProfile-Images\\ImageProfile-Images.csproj"
             }
           }
         }
@@ -7660,7 +7660,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,4 +1,5 @@
 ﻿using ImageProfile_Images;
+using ImageProfile_Images.Constants;
 using ImageProfile_Images.Interfaces;
 using ImageProfile_Images.Repositories;
 using ImageProfile_Login.Models;
@@ -19,14 +20,14 @@ namespace ImageProfile_Login.Repositories
         private readonly UserReader contextReader;
         private readonly UserWriter contextWriter;
         private readonly JwtRepository jwtRepository;
-        private string controllerName = "Login";
-        Random random = new Random();
-        IEnumerable<string> repeatedAllAsciiChars = Enumerable.Repeat("!\"#$%&\\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~", 4);
-        public UserRepository(UserReader contextReader, UserWriter contextWriter, JwtRepository jwtRepository)
+        private readonly UserConstants userConstants;
+
+        public UserRepository(UserReader contextReader, UserWriter contextWriter, UserConstants userConstants, JwtRepository jwtRepository)
         {
             this.contextReader = contextReader;
             this.contextWriter = contextWriter;
             this.jwtRepository = jwtRepository;
+            this.userConstants = userConstants;
         }
         //Async DB Call
         public async Task<User> ValidateUser(string username, string password)
@@ -55,7 +56,7 @@ namespace ImageProfile_Login.Repositories
                 await contextWriter.AddAsync(user);
                 await contextWriter.SaveChangesAsync();
             }
-            catch (Exception e)
+            catch
             {
                 return new CreationStatus(CreationStatus.UnknownError);
             }
@@ -76,12 +77,12 @@ namespace ImageProfile_Login.Repositories
             return await Task.Run(() =>
             {
                 return string.Join("",
-                    repeatedAllAsciiChars
+                    userConstants.repeatedAllAsciiChars
                     .Select(bigToken =>
                     {
                         return string.Concat(bigToken.Select(c =>
                          {
-                             return bigToken[random.Next(bigToken.Length)];
+                             return bigToken[userConstants.random.Next(bigToken.Length)];
                          }));
                     })
                     );

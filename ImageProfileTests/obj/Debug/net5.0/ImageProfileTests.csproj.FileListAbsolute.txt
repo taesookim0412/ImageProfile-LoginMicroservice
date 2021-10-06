@@ -134,3 +134,5 @@ B:\repos\ImageProfile\ImageProfile-LoginMicroservice\ImageProfileTests\bin\Debug
 B:\repos\ImageProfile\ImageProfile-LoginMicroservice\ImageProfileTests\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 B:\repos\ImageProfile\ImageProfile-LoginMicroservice\ImageProfileTests\bin\Debug\net5.0\ImageProfile-Images.dll
 B:\repos\ImageProfile\ImageProfile-LoginMicroservice\ImageProfileTests\bin\Debug\net5.0\ImageProfile-Images.pdb
+B:\repos\ImageProfile-LoginMicroservice\ImageProfileTests\obj\Debug\net5.0\ImageProfileTests.dll
+B:\repos\ImageProfile-LoginMicroservice\ImageProfileTests\obj\Debug\net5.0\ref\ImageProfileTests.dll
