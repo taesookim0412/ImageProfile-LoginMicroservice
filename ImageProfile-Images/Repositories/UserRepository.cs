@@ -34,7 +34,7 @@ namespace ImageProfile_Login.Repositories
         {
             return await (from user in contextReader.Users
                            where (user.username == username && user.password == password)
-                           select user).SingleAsync();
+                           select user).SingleOrDefaultAsync();
         }
         // Async DB Call
         public async Task<bool> FindOneUser(string username)
@@ -42,11 +42,12 @@ namespace ImageProfile_Login.Repositories
             //return (context.Users.Where(user => user.username == username).SingleAsync() != null);
             return await ((from user in contextReader.Users
                             where user.username == username
-                            select user).SingleAsync()) != null;
+                            select user).SingleOrDefaultAsync()) != null;
         }
 
         public async Task<CreationStatus> CreateUser(string username, string password)
         {
+            Console.WriteLine($"{username}, {password}");
             if (await FindOneUser(username)) return new CreationStatus(CreationStatus.UsernameExists);
             try
             {
