@@ -27,12 +27,18 @@ namespace ImageProfile_Login.Controllers
 
         //Input: username, password (bcrypted)
         //Returns: "400: error, 200: jwt token"
-        [HttpPost("/login/login")]
-        public async Task<ActionResult> Login(string username, string password)
+        [HttpPost("login/login")]
+        public async Task<ActionResult> Login(string username)
         {
-            User result = await userRepository.ValidateUser(username, password);
+            User result = await userRepository.ValidateUser(username);
             if (result == null) { return BadRequest(); }
-            return Ok((await jwtRepository.CreateToken(username)).Token);
+            return Ok(result);
+        }
+
+        [HttpPost("login/generatejwt")]
+        public async Task<ActionResult> GenerateJwt(string username)
+        {
+            return Ok(await jwtRepository.CreateToken(username));
         }
 
         //Input: username, password (bcrypted)
