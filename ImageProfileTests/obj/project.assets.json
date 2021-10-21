@@ -2211,7 +2211,7 @@
           "build/netcoreapp2.1/xunit.runner.visualstudio.props": {}
         }
       },
-      "ImageProfile-Images/1.0.0": {
+      "ImageProfile-Login/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
@@ -2223,10 +2223,10 @@
           "System.IdentityModel.Tokens.Jwt": "6.12.2"
         },
         "compile": {
-          "bin/placeholder/ImageProfile-Images.dll": {}
+          "bin/placeholder/ImageProfile-Login.dll": {}
         },
         "runtime": {
-          "bin/placeholder/ImageProfile-Images.dll": {}
+          "bin/placeholder/ImageProfile-Login.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
@@ -7566,15 +7566,15 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
-    "ImageProfile-Images/1.0.0": {
+    "ImageProfile-Login/1.0.0": {
       "type": "project",
-      "path": "../ImageProfile-Images/ImageProfile-Images.csproj",
-      "msbuildProject": "../ImageProfile-Images/ImageProfile-Images.csproj"
+      "path": "../ImageProfile-Login/ImageProfile-Login.csproj",
+      "msbuildProject": "../ImageProfile-Login/ImageProfile-Login.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "ImageProfile-Images >= 1.0.0",
+      "ImageProfile-Login >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 16.9.4",
       "coverlet.collector >= 3.0.2",
       "xunit >= 2.4.1",
@@ -7608,8 +7608,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "B:\\repos\\ImageProfile-LoginMicroservice\\ImageProfile-Images\\ImageProfile-Images.csproj": {
-              "projectPath": "B:\\repos\\ImageProfile-LoginMicroservice\\ImageProfile-Images\\ImageProfile-Images.csproj"
+            "B:\\repos\\ImageProfile-LoginMicroservice\\ImageProfile-Login\\ImageProfile-Login.csproj": {
+              "projectPath": "B:\\repos\\ImageProfile-LoginMicroservice\\ImageProfile-Login\\ImageProfile-Login.csproj"
             }
           }
         }

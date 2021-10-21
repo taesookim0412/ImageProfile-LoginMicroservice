@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ImageProfile-Images\ImageProfile-Images.csproj" />
+    <ProjectReference Include="..\ImageProfile-Login\ImageProfile-Login.csproj" />
   </ItemGroup>
 
 </Project>

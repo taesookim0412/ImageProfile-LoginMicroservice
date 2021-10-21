@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProfile-Login", "ImageProfile-Login\ImageProfile-Login.csproj", "{3668A837-8892-4481-AD92-59FE0F733FEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProfileTests", "ImageProfileTests\ImageProfileTests.csproj", "{C5819FFA-9666-4A02-BF23-7836F779709A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3668A837-8892-4481-AD92-59FE0F733FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3668A837-8892-4481-AD92-59FE0F733FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3668A837-8892-4481-AD92-59FE0F733FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3668A837-8892-4481-AD92-59FE0F733FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5819FFA-9666-4A02-BF23-7836F779709A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5819FFA-9666-4A02-BF23-7836F779709A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5819FFA-9666-4A02-BF23-7836F779709A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5819FFA-9666-4A02-BF23-7836F779709A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD07CBE6-9991-4DFB-B7A4-089FD52B107B}
+	EndGlobalSection
+EndGlobal
